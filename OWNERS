@@ -1,8 +1,5 @@
+
 approvers:
-- rawlingsj
-- jstrachan
-- rajdavies
+- maintainers
 reviewers:
-- rawlingsj
-- jstrachan
-- rajdavies
+- maintainers
