@@ -23,7 +23,7 @@ spec:
             limits: {}
           workingDir: /workspace/source
         steps:
-        - image: ghcr.io/jenkins-x/jx-boot:3.2.405
+        - image: ghcr.io/jenkins-x/jx-boot:3.10.10
           name: jx-variables
           resources:
             # set requests for the pod here
@@ -34,19 +34,19 @@ spec:
             #!/usr/bin/env sh
             jx gitops variables
             jx gitops pr variables
-        - image: golang:1.17.9
+        - image: golang:1.19.3@sha256:7ffa70183b7596e6bc1b78c132dbba9a6e05a26cd30eaa9832fecad64b83f029
           name: build-make-linux
           resources: {}
           script: |
             #!/bin/sh
             make linux
-        - image: golang:1.17.9
+        - image: golang:1.19.3@sha256:7ffa70183b7596e6bc1b78c132dbba9a6e05a26cd30eaa9832fecad64b83f029
           name: build-make-test
           resources: {}
           script: |
             #!/bin/sh
             make test
-        - image: ghcr.io/jenkins-x/jx-registry:0.1.6
+        - image: ghcr.io/jenkins-x/jx-registry:0.1.10
           name: check-registry
           resources: {}
         - image: gcr.io/kaniko-project/executor:v1.6.0-debug
