@@ -68,6 +68,11 @@ spec:
               secretKeyRef:
                 name: nexus-java
                 key: username
+          - name: ORG_GRADLE_PROJECT_ctoSINexusURL
+            valueFrom:
+              secretKeyRef:
+                name: nexus-java
+                key: url
           resources: {}
           script: |
             #!/bin/sh
