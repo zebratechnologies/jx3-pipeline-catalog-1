@@ -115,6 +115,8 @@ spec:
             #!/usr/bin/env sh
             source .jx/variables.sh
             jx gitops helm release
+            echo "from catalog"
+            cd ./charts/$APP_NAME && curl --fail -sS -u $JX_REPOSITORY_USERNAME:$JX_REPOSITORY_PASSWORD --data-binary @$APP_NAME-$VERSION.tgz https://chartmuseum.dev.cto-si.zebra.com/api/charts
         - image: ghcr.io/jenkins-x-plugins/jx-promote:0.6.3
           name: promote-jx-promote
           resources: {}
