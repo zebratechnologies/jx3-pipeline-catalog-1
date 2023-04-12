@@ -42,13 +42,13 @@ spec:
               secretKeyRef:
                 key: username
                 name: tekton-git
-          image: ghcr.io/jenkins-x/jx-release-version:2.6.6
+          image: ghcr.io/jenkins-x/jx-release-version:2.6.10
           name: next-version
           resources: {}
           script: |
             #!/usr/bin/env sh
             jx-release-version --tag > VERSION
-        - image: ghcr.io/jenkins-x/jx-boot:3.10.70
+        - image: ghcr.io/jenkins-x/jx-boot:3.10.83
           name: jx-variables
           resources:
             # set requests for the pod here
@@ -97,7 +97,7 @@ spec:
             source .jx/variables.sh
             cp /tekton/creds/.docker/config.json /kaniko/.docker/config.json
             /kaniko/executor $KANIKO_FLAGS --context=/workspace/source --dockerfile=${DOCKERFILE_PATH:-Dockerfile} --destination=$PUSH_CONTAINER_REGISTRY/$DOCKER_REGISTRY_ORG/$APP_NAME:$VERSION
-        - image: ghcr.io/jenkins-x/jx-boot:3.10.70
+        - image: ghcr.io/jenkins-x/jx-boot:3.10.83
           name: promote-changelog
           resources: {}
           script: |
@@ -107,6 +107,7 @@ spec:
             if [ -d "charts/$REPO_NAME" ]; then
             jx gitops yset -p version -v "$VERSION" -f ./charts/$REPO_NAME/Chart.yaml
             jx gitops yset -p appVersion -v "$VERSION" -f ./charts/$REPO_NAME/Chart.yaml
+            yq e -i '.sources = ((.sources // []) + "'$REPO_URL'" | unique)' ./charts/$REPO_NAME/Chart.yaml
             jx gitops yset -p 'image.repository' -v $DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/$APP_NAME -f ./charts/$REPO_NAME/values.yaml
             jx gitops yset -p 'image.tag' -v "$VERSION" -f ./charts/$REPO_NAME/values.yaml;
             else echo no charts; fi
@@ -117,14 +118,14 @@ spec:
             git push --force origin v$VERSION
 
             jx changelog create --version v${VERSION} --output-markdown ../changelog.md
-        - image: ghcr.io/jenkins-x/jx-boot:3.10.70
+        - image: ghcr.io/jenkins-x/jx-boot:3.10.83
           name: promote-step6
           resources: {}
           script: |
             #!/usr/bin/env sh
             source .jx/variables.sh
             jx gitops helm release
-        - image: ghcr.io/jenkins-x/jx-boot:3.10.70
+        - image: ghcr.io/jenkins-x/jx-boot:3.10.83
           name: promote-jx
           resources: {}
           script: |
