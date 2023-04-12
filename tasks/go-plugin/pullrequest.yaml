@@ -23,7 +23,7 @@ spec:
             limits: {}
           workingDir: /workspace/source
         steps:
-        - image: ghcr.io/jenkins-x/jx-boot:3.10.10
+        - image: ghcr.io/jenkins-x/jx-boot:3.10.83
           name: jx-variables
           resources:
             # set requests for the pod here
@@ -55,13 +55,13 @@ spec:
         - image: ghcr.io/jenkins-x/jx-registry:0.1.10
           name: check-registry
           resources: {}
-        - image: gcr.io/kaniko-project/executor:v1.6.0-debug
+        - image: gcr.io/kaniko-project/executor:v1.9.1-debug
           name: build-container-build
           resources: {}
           script: |
             #!/busybox/sh
             source .jx/variables.sh
-            cp /tekton/creds-secrets/tekton-container-registry-auth/.dockerconfigjson /kaniko/.docker/config.json
+            cp /tekton/creds/.docker/config.json /kaniko/.docker/config.json
             /kaniko/executor $KANIKO_FLAGS --context=/workspace/source --dockerfile=${DOCKERFILE_PATH:-Dockerfile} --destination=$DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/$REPO_NAME:$VERSION
   podTemplate: {}
   serviceAccountName: tekton-bot

@@ -47,3 +47,14 @@ If the [helm/charts](helm/charts) folder is modified you can upgrade the charts 
 ```bash
 jx gitops upgrade --ignore-yaml-error
 ```
+<details>
+    <summary>Zebra Repository Information</summary>
+    <ul>
+        <li> Zebra Business Unit : CTO </li>
+        <li> Zebra Manager : Valik </li>
+        <li> Zebra Repo Admin: valiksb </li>
+        <li> Zebra Jira Project ID: VoiceAI </li>
+        <li> Product: VoiceAI</li>
+        <li> Topics: bu-cto-rpt, no_codeql </li>
+    </ul>
+</details>
