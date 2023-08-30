@@ -88,7 +88,7 @@ require (
 	gopkg.in/validator.v2 v2.0.0-20200605151824-2b28d334fa05 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
+	gopkg.in/yaml.v3 v3.0.0 // indirect
 	helm.sh/helm/v3 v3.6.3 // indirect
 	k8s.io/api v0.21.0 // indirect
 	k8s.io/apiextensions-apiserver v0.21.0 // indirect
