@@ -11,7 +11,7 @@ spec:
         taskSpec:
           metadata: {}
           stepTemplate:
-            image: uses:zebratechnologies/jx3-pipeline-catalog-1/tasks/voiceai-gradle/release.yaml@voiceai-specific-v2
+            image: uses:zebratechnologies/jx3-pipeline-catalog-1/tasks/voiceai-gradle/release.yaml@voiceai-specific-v3
             name: ""
             resources:
               # override limits for all containers here
