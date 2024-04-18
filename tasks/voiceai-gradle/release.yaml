@@ -50,7 +50,7 @@ spec:
           script: |
             #!/usr/bin/env sh
             jx gitops variables
-        - image: gradle:6.8.3-jdk8
+        - image: gradle:7.6.4-jdk17
           name: build-gradle-build
           env:
           - name: ORG_GRADLE_PROJECT_ctoSIMavenUser
